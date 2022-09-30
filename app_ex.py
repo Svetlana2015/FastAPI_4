@@ -111,7 +111,10 @@ class Parametres(BaseModel):
     WEEKDAY_APPR_PROCESS_START : str = Field(title = "Quel jour de la semaine le client a-t-il demandé le prêt", list = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY',
                                                                                                            'SATURDAY', 'SUNDAY'])
     
-
+@app.get("/status")
+def get_status():
+    """Get status of messaging server."""
+    return ({"status":  "running"})
                
 @app.post("/predict")
 def predict(datas: Parametres):
