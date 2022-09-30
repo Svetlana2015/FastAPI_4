@@ -4,6 +4,11 @@ import joblib
 import numpy as np
 import pandas as pd
 
+# S3
+import boto3
+from io import BytesIO
+s3 = boto3.client('s3')
+bucket_name = 'svetlana2015' # to be replaced with YOUR bucket name
 
 # Server
 #import uvicorn
@@ -17,10 +22,15 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # Initialize files
-clf = joblib.load('mrf.joblib')
-enc = joblib.load('encoder_2.joblib')
-scaler = joblib.load('mmsc_3.joblib')
-#features = joblib.load('features.joblib')
+def read_s3_joblib_file(key):
+    with BytesIO() as data:
+        s3.download_fileobj(Fileobj=data, Bucket=bucket_name, Key=key)
+        data.seek(0)
+        return joblib.load(data)
+
+enc = read_s3_joblib_file('encoder_2.joblib')
+scaler = read_s3_joblib_file('mmsc_3.joblib')
+clf = read_s3_joblib_file('mrf.joblib')
 
 # Class which describes a single utilisateur
 class Parametres(BaseModel):
