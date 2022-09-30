@@ -6,8 +6,8 @@ import pandas as pd
 
 
 # Server
-import uvicorn
-import gunicorn
+#import uvicorn
+#import gunicorn
 from fastapi import FastAPI
 
 from pydantic import BaseModel, Field
