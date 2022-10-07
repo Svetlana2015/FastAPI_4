@@ -11,13 +11,9 @@ s3 = boto3.client('s3')
 bucket_name = 'svetlana2015' # to be replaced with YOUR bucket name
 
 # Server
-#import uvicorn
-#import gunicorn
 from fastapi import FastAPI
 
 from pydantic import BaseModel, Field
-from fastapi.responses import JSONResponse
-
 
 app = FastAPI()
 
@@ -131,12 +127,8 @@ def predict(datas: Parametres):
     
     # Extract data in correct order
     datas_dict = datas.dict()
-    print(datas_dict)
 
-    df = pd.DataFrame([datas_dict])
-    print(df)
-    print(df.info())
-   
+    df = pd.DataFrame([datas_dict])   
 
     # Apply one-hot encoding
     categorical = df.select_dtypes(include = ['object'])
@@ -149,11 +141,9 @@ def predict(datas: Parametres):
                   'FLAG_OWN_REALTY', 'FLAG_OWN_CAR','NAME_EDUCATION_TYPE',  'OCCUPATION_TYPE',
                  'NAME_INCOME_TYPE', 'NAME_CONTRACT_TYPE', 'WEEKDAY_APPR_PROCESS_START'], axis = 1)
     df = pd.concat([df, encoded_features], axis=1)
-    print("done")
 
     # Apply MinMaScaler
     df[df.columns] = pd.DataFrame(scaler.transform(df), index= df.index)
-    print('done')
 
     # Create and return prediction
 
