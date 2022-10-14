@@ -8,7 +8,7 @@ import pandas as pd
 import boto3
 from io import BytesIO
 s3 = boto3.client('s3')
-bucket_name = 'svetlana2015' # to be replaced with YOUR bucket name
+bucket_name = 'fastapimodels' # to be replaced with YOUR bucket name
 
 # Server
 from fastapi import FastAPI
