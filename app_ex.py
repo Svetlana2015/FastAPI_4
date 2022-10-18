@@ -39,7 +39,7 @@ class Parametres(BaseModel):
     
     FLAG_PHONE: int = Field(title = "Le client a-t-il fourni un téléphone résidentiel (1=OUI, 0=NON)", list = [1,0])
     FLAG_CONT_MOBILE : int = Field(title = "Le téléphone portable était-il joignable (1=OUI, 0=NON)", list = [1,0])
-    DAYS_LAST_PHONE_CHANGE: int = Field(title = "Combien de jours avant l'application le client a-t-il changé de téléphone", ge=0, le=1000)
+    DAYS_LAST_PHONE_CHANGE: int = Field(title = "Combien de jours avant l'application le client a-t-il changé de téléphone", ge=-5000, le=0)
     FLAG_EMAIL : int = Field(title = "Le client a-t-il fourni un e-mail (1=OUI, 0=NON)", list = [1,0])
     
     DAYS_EMPLOYED: int = Field(title = "Combien de jours avant la demande la personne a commencé l'emploi actuel?", ge=-18000, le=0)
@@ -89,9 +89,9 @@ class Parametres(BaseModel):
     FLAG_DOCUMENT_3 : int = Field(title = "Le client a-t-il fourni le document 3 (1=OUI, 0=NON)", list = [1,0])
     FLAG_DOCUMENT_2 : int = Field(title = "Le client a-t-il fourni le document 2 (1=OUI, 0=NON)", list = [1,0])
     OBS_60_CNT_SOCIAL_CIRCLE: int = Field(title = "Combien d'observations de l'environnement social du client avec un défaut observable de 30 DPD (jours de retard)",
-                                          list = [0,1,2,3,4,5],ge = 1,le = 5)
+                                          list = [0,1,2,3,4,5],ge = 0,le = 5)
     OBS_30_CNT_SOCIAL_CIRCLE: int = Field(title = "Combien d'observations de l'environnement social du client avec un défaut observable de 60 DPD (jours de retard)",
-                                          list = [0,1,2,3,4,5],ge = 1,le = 5)
+                                          list = [0,1,2,3,4,5],ge = 0,le = 5)
     EXT_SOURCE_2: float = Field(title = "Score normalisé à partir d'une source de données externe (2)", ge = 0.0, le = 1.0)
     EXT_SOURCE_3: float = Field(title = "Score normalisé à partir d'une source de données externe (3)", ge = 0.0, le = 1.0) #description="The score must be greater than zero")
 
